@@ -1,0 +1,59 @@
+[build-system]
+requires = ["setuptools>=75.3.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dlpipkle"
+version = "0.1.0"
+description = "Tool for downloading pip packages and their dependencies"
+readme = {file = "README.md", content-type = "text/markdown"}
+requires-python = ">=3.8"
+license = {text = "MIT"}
+keywords = ["pip", "download", "dependencies", "offline", "packages"]
+dependencies = [
+    "wheel-filename",
+    "packaging>=21.0",
+    "resolvelib>=1.1.0",
+    "unearth>=0.17.5",
+    "pip>=25.0.1",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "black>=24.1.0",
+    "isort>=5.13.0",
+    "mypy>=1.0.0",
+    "build",
+    "twine",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/mobilemutex/dlpipkle"
+"Bug Tracker" = "https://github.com/mobilemutex/dlpipkle/issues"
+
+[project.scripts]
+dlpipkle = "dlpipkle.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["dlpipkle*"]
+
+[tool.black]
+line-length = 88
+target-version = ["py38"]
+
+[tool.isort]
+profile = "black"
+line_length = 88
+
+[tool.mypy]
+python_version = "3.8"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = "test_*.py"
